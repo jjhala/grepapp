@@ -2,22 +2,24 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"net/http"
 )
 
-func httpCheck() {
+func httpCheck() (result []string) {
 
-	resp, err := http.Get("http://gobyexample.com")
+	resp, err := http.Get("http://golang.org/doc/effective_go")
 	errorCheck(err)
 	defer resp.Body.Close()
 
 	scanner := bufio.NewScanner(resp.Body)
-	for i := 0; scanner.Scan() && i < 5; i++ {
-		fmt.Println(scanner.Text())
-	}
+	scanner.Split(bufio.ScanLines)
 
+	for scanner.Scan() {
+		result = append(result, scanner.Text())
+	}
 	if err := scanner.Err(); err != nil {
 		panic(err)
 	}
+	return
+
 }

@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // The agenda:
 // 1. App structure
 //		1.1 Go don't go with a packages in most cases (it's not Java or C++)
@@ -25,7 +27,8 @@ package main
 // 5. Make own grep
 
 func main() {
-	httpCheck()
+	result := httpCheck()
+	fmt.Println(result)
 	/* 	if len(os.Args[1:]) > 1 {
 	   		osconfig := os.Args[1]
 	   		content, err := readChunk(osconfig)
