@@ -45,9 +45,7 @@ func main() {
 	}
 	config := mustGetConfig()
 	content, err := readChunk(config.filePath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	errorCheck(err)
 
 	if config.ignoreCase == "true" {
 		detected, err := checkFull(content, config.keyString, caseCheck, caseFormat)
