@@ -1,10 +1,5 @@
 package main
 
-import (
-	"log"
-	"os"
-)
-
 // The agenda:
 // 1. App structure
 //		1.1 Go don't go with a packages in most cases (it's not Java or C++)
@@ -30,38 +25,38 @@ import (
 // 5. Make own grep
 
 func main() {
+	httpCheck()
+	/* 	if len(os.Args[1:]) > 1 {
+	   		osconfig := os.Args[1]
+	   		content, err := readChunk(osconfig)
+	   		if err != nil {
+	   			log.Fatal(err)
+	   		}
+	   		keyString := os.Args[2]
+	   		detected, err := checkFull(content, keyString, containsCheck, colorFormat)
+	   		errorCheck(err)
+	   		print(detected)
+	   		return
+	   	}
+	   	config := mustGetConfig()
+	   	content, err := readChunk(config.filePath)
+	   	errorCheck(err)
 
-	if len(os.Args[1:]) > 1 {
-		osconfig := os.Args[1]
-		content, err := readChunk(osconfig)
-		if err != nil {
-			log.Fatal(err)
-		}
-		keyString := os.Args[2]
-		detected, err := checkFull(content, keyString, containsCheck, colorFormat)
-		errorCheck(err)
-		print(detected)
-		return
-	}
-	config := mustGetConfig()
-	content, err := readChunk(config.filePath)
-	errorCheck(err)
+	   	if config.ignoreCase == "true" {
+	   		detected, err := checkFull(content, config.keyString, caseCheck, caseFormat)
+	   		errorCheck(err)
+	   		print(detected)
+	   		return
+	   	}
 
-	if config.ignoreCase == "true" {
-		detected, err := checkFull(content, config.keyString, caseCheck, caseFormat)
-		errorCheck(err)
-		print(detected)
-		return
-	}
-
-	if config.regex == "true" {
-		detected, err := checkFull(content, config.keyString, regCheck, regFormat)
-		errorCheck(err)
-		print(detected)
-		return
-	}
-	detected, err := checkFull(content, config.keyString, containsCheck, colorFormat)
-	errorCheck(err)
-	print(detected)
+	   	if config.regex == "true" {
+	   		detected, err := checkFull(content, config.keyString, regCheck, regFormat)
+	   		errorCheck(err)
+	   		print(detected)
+	   		return
+	   	}
+	   	detected, err := checkFull(content, config.keyString, containsCheck, colorFormat)
+	   	errorCheck(err)
+	   	print(detected) */
 
 }
