@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // The agenda:
 // 1. App structure
 //		1.1 Go don't go with a packages in most cases (it's not Java or C++)
@@ -27,11 +25,15 @@ import "fmt"
 // 5. Make own grep
 
 func main() {
-	result := httpCheck()
-	fmt.Println(result)
+	content := readHttp()
+	keyString := "pointers"
+	detected, err := checkFull(content, keyString, containsCheck, colorFormat)
+	errorCheck(err)
+	print(detected)
+
 	/* 	if len(os.Args[1:]) > 1 {
 	   		osconfig := os.Args[1]
-	   		content, err := readChunk(osconfig)
+	   		content, err := readFileChunk(osconfig)
 	   		if err != nil {
 	   			log.Fatal(err)
 	   		}
@@ -42,7 +44,7 @@ func main() {
 	   		return
 	   	}
 	   	config := mustGetConfig()
-	   	content, err := readChunk(config.filePath)
+	   	content, err := readFileChunk(config.filePath)
 	   	errorCheck(err)
 
 	   	if config.ignoreCase == "true" {

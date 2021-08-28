@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 )
 
@@ -27,7 +29,7 @@ import (
 	return result, nil
 } */
 
-func readChunk(filePath string) ([]string, error) {
+func readFileChunk(filePath string) ([]string, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		fmt.Println("Error opening file!!!")
@@ -52,4 +54,22 @@ func readChunk(filePath string) ([]string, error) {
 		k = append(k, string(b[:readTotal]))
 	}
 	return k, nil
+}
+
+func readHttp() (result []string) {
+
+	resp, err := http.Get("http://golang.org/doc/effective_go")
+	errorCheck(err)
+	defer resp.Body.Close()
+
+	scanner := bufio.NewScanner(resp.Body)
+	scanner.Split(bufio.ScanLines)
+
+	for scanner.Scan() {
+		result = append(result, scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		panic(err)
+	}
+	return
 }
