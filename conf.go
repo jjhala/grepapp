@@ -50,9 +50,13 @@ func (c config) validate() error {
 	if c.keyString == "" {
 		return errors.New("nothing to search")
 	}
-	/* 	if c.ignoreCase != "true" || c.ignoreCase == "" {
-		return errors.New("only accepts lowercase true setting")
-	} */
+
+	if c.ignoreCase != "true" {
+		_, boolean := os.LookupEnv("IGNORE_CASE")
+		if boolean {
+			return errors.New("ignorecase parameter needs to be lowercase true")
+		}
+	}
 
 	return nil
 }
