@@ -1,5 +1,11 @@
 package main
 
+import (
+	"fmt"
+	"log"
+	"os"
+)
+
 // The agenda:
 // 1. App structure
 //		1.1 Go don't go with a packages in most cases (it's not Java or C++)
@@ -25,43 +31,56 @@ package main
 // 5. Make own grep
 
 func main() {
-	content := readHttp()
-	keyString := "pointers"
-	detected, err := checkFull(content, keyString, containsCheck, colorFormat)
-	errorCheck(err)
-	print(detected)
 
-	/* 	if len(os.Args[1:]) > 1 {
-	   		osconfig := os.Args[1]
-	   		content, err := readFileChunk(osconfig)
-	   		if err != nil {
-	   			log.Fatal(err)
-	   		}
-	   		keyString := os.Args[2]
-	   		detected, err := checkFull(content, keyString, containsCheck, colorFormat)
-	   		errorCheck(err)
-	   		print(detected)
-	   		return
-	   	}
-	   	config := mustGetConfig()
-	   	content, err := readFileChunk(config.filePath)
-	   	errorCheck(err)
+	fmt.Println("Option: 1. Search a webpage \t2. Commandline Arguments \t3. Env variables")
+	fmt.Println("Press the option")
+	var l int
+	fmt.Scanln(&l)
 
-	   	if config.ignoreCase == "true" {
-	   		detected, err := checkFull(content, config.keyString, caseCheck, caseFormat)
-	   		errorCheck(err)
-	   		print(detected)
-	   		return
-	   	}
+	switch l {
+	case 1:
+		content := readHttp()
+		fmt.Println("Enter the string you want to search: ")
+		var keyString string
+		fmt.Scanln(&keyString)
+		detected, err := checkFull(content, keyString, containsCheck, colorFormat)
+		errorCheck(err)
+		print(detected)
 
-	   	if config.regex == "true" {
-	   		detected, err := checkFull(content, config.keyString, regCheck, regFormat)
-	   		errorCheck(err)
-	   		print(detected)
-	   		return
-	   	}
-	   	detected, err := checkFull(content, config.keyString, containsCheck, colorFormat)
-	   	errorCheck(err)
-	   	print(detected) */
+	case 2:
+		osconfig := os.Args[1]
+		content, err := readFileChunk(osconfig)
+		if err != nil {
+			log.Fatal(err)
+		}
+		keyString := os.Args[2]
+		detected, err := checkFull(content, keyString, containsCheck, colorFormat)
+		errorCheck(err)
+		print(detected)
 
+	case 3:
+		config := mustGetConfig()
+		content, err := readFileChunk(config.filePath)
+		errorCheck(err)
+
+		if config.ignoreCase == "true" {
+			detected, err := checkFull(content, config.keyString, caseCheck, caseFormat)
+			errorCheck(err)
+			print(detected)
+			return
+		}
+
+		if config.regex == "true" {
+			detected, err := checkFull(content, config.keyString, regCheck, regFormat)
+			errorCheck(err)
+			print(detected)
+			return
+		}
+		detected, err := checkFull(content, config.keyString, containsCheck, colorFormat)
+		errorCheck(err)
+		print(detected)
+
+	default:
+		fmt.Println("Not a valid option")
+	}
 }
