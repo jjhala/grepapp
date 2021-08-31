@@ -30,6 +30,8 @@ import (
 // 5. Make own grep
 
 func main() {
+	var detected []string
+	var err error
 
 	if len(os.Args[1:]) > 1 {
 		osconfig := os.Args[1]
@@ -38,7 +40,7 @@ func main() {
 			log.Fatal(err)
 		}
 		keyString := os.Args[2]
-		detected, err := checkFull(content, keyString, containsCheck, colorFormat)
+		detected, err = checkFull(content, keyString, containsCheck, colorFormat)
 		errorCheck(err)
 		print(detected)
 		return
@@ -48,19 +50,12 @@ func main() {
 	errorCheck(err)
 
 	if config.ignoreCase == "true" {
-		detected, err := checkFull(content, config.keyString, caseCheck, caseFormat)
-		errorCheck(err)
-		print(detected)
-		return
+		detected, err = checkFull(content, config.keyString, caseCheck, caseFormat)
+	} else if config.regex == "true" {
+		detected, err = checkFull(content, config.keyString, regCheck, regFormat)
+	} else {
+		detected, err = checkFull(content, config.keyString, containsCheck, colorFormat)
 	}
-
-	if config.regex == "true" {
-		detected, err := checkFull(content, config.keyString, regCheck, regFormat)
-		errorCheck(err)
-		print(detected)
-		return
-	}
-	detected, err := checkFull(content, config.keyString, containsCheck, colorFormat)
 	errorCheck(err)
 	print(detected)
 
