@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -50,9 +49,7 @@ func main() {
 	case 2:
 		osconfig := os.Args[1]
 		content, err := readFileChunk(osconfig)
-		if err != nil {
-			log.Fatal(err)
-		}
+		errorCheck(err)
 		keyString := os.Args[2]
 		detected, err := checkFull(content, keyString, containsCheck, colorFormat)
 		errorCheck(err)
@@ -67,14 +64,14 @@ func main() {
 			detected, err := checkFull(content, config.keyString, caseCheck, caseFormat)
 			errorCheck(err)
 			print(detected)
-			return
+			//return
 		}
 
 		if config.regex == "true" {
 			detected, err := checkFull(content, config.keyString, regCheck, regFormat)
 			errorCheck(err)
 			print(detected)
-			return
+			//return
 		}
 		detected, err := checkFull(content, config.keyString, containsCheck, colorFormat)
 		errorCheck(err)
