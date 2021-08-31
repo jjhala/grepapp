@@ -50,7 +50,7 @@ func main() {
 	errorCheck(err)
 
 	if config.ignoreCase == "true" {
-		detected, err = checkFull(content, config.keyString, caseCheck, caseFormat)
+		detected, err = checkFull(content, config.keyString, caseCheck, colorFormat)
 	} else if config.regex == "true" {
 		detected, err = checkFull(content, config.keyString, regCheck, regFormat)
 	} else {
