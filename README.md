@@ -11,5 +11,5 @@ FILE_PATH="hamlet.txt" KEY_STRING="FORTINBRAS" IGNORE_CASE="true" ./basicapps
 ## Using regex
 FILE_PATH="hamlet.txt" KEY_STRING="FORTIN+" REGEX="true" ./basicapps
 
-## Using stdin
+## Using stdin (includes case insensitive search)
 ./basicapps hamlet.txt FORTINBRAS
