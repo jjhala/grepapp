@@ -40,7 +40,7 @@ func main() {
 			log.Fatal(err)
 		}
 		keyString := os.Args[2]
-		detected, err = checkFull(content, keyString, containsCheck, colorFormat)
+		detected, err = checkFull(content, keyString, caseCheck, colorFormat)
 		errorCheck(err)
 		print(detected)
 		return
