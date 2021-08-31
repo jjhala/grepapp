@@ -40,7 +40,7 @@ func main() {
 			log.Fatal(err)
 		}
 		keyString := os.Args[2]
-		detected, err = checkFull(content, keyString, containsCheck, colorFormat)
+		detected, err = checkFull(content, keyString, caseCheck, colorFormat)
 		errorCheck(err)
 		print(detected)
 		return
@@ -50,7 +50,7 @@ func main() {
 	errorCheck(err)
 
 	if config.ignoreCase == "true" {
-		detected, err = checkFull(content, config.keyString, caseCheck, caseFormat)
+		detected, err = checkFull(content, config.keyString, caseCheck, colorFormat)
 	} else if config.regex == "true" {
 		detected, err = checkFull(content, config.keyString, regCheck, regFormat)
 	} else {

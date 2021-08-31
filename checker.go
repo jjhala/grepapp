@@ -36,12 +36,31 @@ func containsCheck(keyWord, line string) (string, error) {
 	return "", nil
 }
 
-func caseCheck(keyWord, line string) (string, error) {
+/* func caseCheck(keyWord, line string) (string, error) {
 	// TODO: add test
 	if strings.Contains(strings.ToLower(line), strings.ToLower(keyWord)) {
 		return line, nil
 	}
 	return "", nil
+} */
+
+func caseCheck(keyWord, line string) (string, error) {
+	// TODO: add test
+	j := 0
+	lineArray := strings.Fields(line)
+	for i, v := range lineArray {
+		//println(v)
+		//if v == keyWord {
+		if strings.EqualFold(v, keyWord) {
+			j += 1
+			lineArray[i] = keyWord
+		}
+	}
+	if j != 0 {
+		return strings.Join(lineArray, " "), nil
+	}
+	return "", nil
+
 }
 
 func regCheck(keyWord, line string) (string, error) {

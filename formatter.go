@@ -25,13 +25,13 @@ func colorFormat(keyWord, line string) string {
 	return fmt.Sprintf("%s\n", replaced)
 }
 
-func caseFormat(keyWord, line string) string {
+/* func caseFormat(keyWord, line string) string {
 	if line == "" {
 		return ""
 	}
 	replaced := strings.ReplaceAll(strings.ToLower(line), strings.ToLower(keyWord), fmt.Sprintf("%s%s%s", yellow, keyWord, reset))
 	return fmt.Sprintf("%s\n", replaced)
-}
+} */
 
 func regFormat(keyWord, line string) string {
 	if line == "" {
